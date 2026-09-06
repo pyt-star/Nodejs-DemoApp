@@ -48,11 +48,8 @@ pipeline {
                 script {
                     bat 'echo Deploying the application...'
 
-                    bat 'start "" /B node server.js'
-
-                    sleep 30
-
-                    bat 'C:\\Windows\\System32\\taskkill.exe /F /IM node.exe'
+                    bat 'echo Deploying the application....'
+                    bat 'npm start'
                 }
             }
         }
@@ -60,6 +57,10 @@ pipeline {
     }
 
     post {
+        always {
+            echo 'cleaning up....'
+            clearWs()
+        }
 
         success {
             echo 'Pipeline completed successfully.'
